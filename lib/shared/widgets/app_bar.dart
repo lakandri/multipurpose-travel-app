@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/constant/constant.dart';
+import 'package:ticketing_system/core/constant/constant.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ticketing_system/core/constant/constant.dart';
 
-class CabScreen extends StatefulWidget {
-  const CabScreen({Key? key}) : super(key: key);
+class Eventticketscreen extends StatefulWidget {
+  const Eventticketscreen({Key? key}) : super(key: key);
 
   @override
-  State<CabScreen> createState() => _CabScreenState();
+  State<Eventticketscreen> createState() => _CabScreenState();
 }
 
-class _CabScreenState extends State<CabScreen> {
+class _CabScreenState extends State<Eventticketscreen> {
   int selectedIndex = 0;
 
   final List<Map<String, String>> vehicleOptions = [
@@ -95,7 +95,7 @@ class _CabScreenState extends State<CabScreen> {
         border: isSelected
             ? Border.all(
                 color: const Color.fromARGB(255, 250, 181, 181), width: 2)
-            : null,
+            : null, // Optional border
       ),
       child: Column(
         children: [

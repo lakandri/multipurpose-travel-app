@@ -16,10 +16,11 @@ class DestinationList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 200,
+        height: 150,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: destinations.length,
+          shrinkWrap: true,
           itemBuilder: (context, index) {
             final destination = destinations[index];
             return Padding(
@@ -31,17 +32,27 @@ class DestinationList extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DestinationDetailPage(
-                                    destinationName: 'Pokhara')));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DestinationDetailPage(
+                              destinationName: destination['name']!,
+                            ),
+                          ),
+                        );
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
                           destination['image']!,
                           fit: BoxFit.cover,
-                          width: 150,
+                          width: 200,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey,
+                              width: 200,
+                              child: Icon(Icons.error),
+                            );
+                          },
                         ),
                       ),
                     ),

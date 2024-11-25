@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ticketing_system/core/constant/constant.dart';
 
-class CabScreen extends StatefulWidget {
-  const CabScreen({Key? key}) : super(key: key);
+class Votingscreen extends StatefulWidget {
+  const Votingscreen({Key? key}) : super(key: key);
 
   @override
-  State<CabScreen> createState() => _CabScreenState();
+  State<Votingscreen> createState() => _CabScreenState();
 }
 
-class _CabScreenState extends State<CabScreen> {
-  int selectedIndex = 0;
+class _CabScreenState extends State<Votingscreen> {
+  int selectedIndex = 0; // Variable to track selected option
 
   final List<Map<String, String>> vehicleOptions = [
     {'image': 'assets/taxi.png', 'name': 'Comfort'},
@@ -95,7 +95,7 @@ class _CabScreenState extends State<CabScreen> {
         border: isSelected
             ? Border.all(
                 color: const Color.fromARGB(255, 250, 181, 181), width: 2)
-            : null,
+            : null, // Optional border
       ),
       child: Column(
         children: [

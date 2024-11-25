@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/widgets/offers_list.dart';
+import 'package:ticketing_system/screens/inside_screen/CustomerSupportScreen.dart';
+import 'package:ticketing_system/screens/inside_screen/MyTripsScreen.dart';
+import 'package:ticketing_system/screens/inside_screen/account_screen.dart';
+import 'package:ticketing_system/screens/inside_screen/offers.dart';
+import 'package:ticketing_system/shared/buttonnavbar.dart';
+import 'package:ticketing_system/shared/widgets/app_bar.dart';
 
-import '../widgets/app_bar.dart';
-import '../widgets/bottom_nav_bar.dart';
-import '../widgets/category_list.dart';
-import '../widgets/destination_list.dart';
+import '../shared/widgets/category_list.dart';
+import '../shared/widgets/destination_list.dart';
+import '../shared/widgets/offers_list.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,39 +24,71 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Widget _getBodyContent() {
+    switch (_selectedIndex) {
+      case 0:
+        return _buildHomeContent();
+      case 1:
+        return const OffersScreen();
+      case 2:
+        return MyTripsScreen();
+      case 3:
+        return CustomerSupportScreen();
+      case 4:
+        return AccountScreen();
+      default:
+        return _buildHomeContent();
+    }
+  }
+
+  Widget _buildHomeContent() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CategoryList(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Text("Top destinations"),
+          ),
+          DestinationList(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Text(
+              "Offers",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+          ),
+          OffersList(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOffersContent() {
+    return const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.local_offer, size: 100, color: Colors.orange),
+          SizedBox(height: 20),
+          Text(
+            "Exclusive Offers!",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CategoryList(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: const Text(
-                "Top destinations",
-              ),
-            ),
-            DestinationList(),
-
-// offers list
-
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Text(
-                "Offers",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-            ),
-            OffersList(),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavBar(
+      body: _getBodyContent(),
+      bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _selectedIndex,
-        onTabSelected: _onNavItemTapped,
+        onTap: _onNavItemTapped,
       ),
     );
   }
